@@ -1,10 +1,13 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "lemlib-tarball/api.hpp"
 
 // left motor group
-pros::MotorGroup left_motor_group({-1, 2, -3}, pros::MotorGears::green);
+pros::MotorGroup left_motor_group({-1}, pros::MotorGears::green);
 // right motor group
-pros::MotorGroup right_motor_group({4, -5, 6}, pros::MotorGears::green);
+pros::MotorGroup right_motor_group({4}, pros::MotorGears::green);
+// intake motor
+pros::Motor intake_motor(7, pros::MotorGears::green);
 
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_motor_group, // left motor group
@@ -84,14 +87,22 @@ void initialize() {
 
 // path file name is "example.txt".
 // "." is replaced with "_" to overcome c++ limitations
-ASSET(example_txt);
+ASSET(my_lemlib_tarball_file_txt);
+
+lemlib_tarball::Decoder decoder(my_lemlib_tarball_file_txt);
 
 void autonomous() {
     // set chassis pose
     chassis.setPose(0, 0, 0);
-    // lookahead distance: 15 inches
-    // timeout: 2000 ms
-    chassis.follow(example_txt, 15, 2000);
+
+    chassis.follow(decoder["Path 1"], 15, 2000);
+
+    // control other robot subsystems
+    intake_motor.move(127);
+    pros::delay(1000);
+    intake_motor.move(0);
+
+    chassis.follow(decoder["Path 2"], 15, 2000);
 }
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
