@@ -36,7 +36,8 @@ Decoder::Decoder(const asset& tarball) {
     }
 
     if (recording_path) {
-        std::size_t path_content_end = pos;
+        std::string last_line = tarball_str.substr(pos);
+        std::size_t path_content_end = last_line.starts_with("#") ? pos : tarball.size;
         asset path = {tarball.buf + path_content_start, path_content_end - path_content_start};
 
         // commit the path
