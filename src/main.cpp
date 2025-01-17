@@ -70,6 +70,11 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 
 // initialize function. Runs on program startup
 void initialize() {
+#ifdef UNIT_TEST
+    void test_initialize();
+    test_initialize();
+    return;
+#endif
     pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
     // print position to brain screen

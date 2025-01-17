@@ -4,7 +4,7 @@
 namespace lemlib_tarball {
 
 Decoder::Decoder(const asset& tarball) {
-    const std::string tarball_str(reinterpret_cast<const char*>(tarball.buf), tarball.size);
+    const std::string tarball_str = std::string(reinterpret_cast<const char*>(tarball.buf), tarball.size);
 
     std::size_t pos = 0;
     std::size_t delimiter_pos = 0;
