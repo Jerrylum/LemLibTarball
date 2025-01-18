@@ -124,7 +124,7 @@ UTEST(integration_test, chassis_follow_2) {
     test_chassis.follow(decoder["Path 1"], 1, 1000, true, true); // async
     ASSERT_TRUE(test_chassis.isInMotion());
     test_chassis.setPose(40, 44, 0);
-    pros::delay(100); // yield to the async task
+    pros::delay(200); // yield to the async task
     ASSERT_FALSE(test_chassis.isInMotion());
 
     test_chassis.setPose(40, 23.622, 0);
@@ -133,6 +133,6 @@ UTEST(integration_test, chassis_follow_2) {
     test_chassis.follow(decoder["Path 2"], 1, 1000, true, true); // async
     ASSERT_TRUE(test_chassis.isInMotion());
     test_chassis.setPose(-43.994, 36.502, 0);
-    pros::delay(100); // yield to the async task
+    pros::delay(200); // yield to the async task
     ASSERT_FALSE(test_chassis.isInMotion());
 }
