@@ -24,7 +24,7 @@ USE_PACKAGE:=0
 EXCLUDE_COLD_LIBRARIES:= 
 
 # Set this to 1 to add additional rules to compile your project as a PROS library template
-IS_LIBRARY:=0
+IS_LIBRARY:=1
 # TODO: CHANGE THIS! 
 # Be sure that your header files are in the include directory inside of a folder with the
 # same name as what you set LIBNAME to below.
@@ -38,7 +38,7 @@ EXCLUDE_SRC_FROM_LIB+=$(wildcard $(SRCDIR)/*.test.cpp) $(wildcard $(SRCDIR)/*.te
 # files that get distributed to every user (beyond your source archive) - add
 # whatever files you want here. This line is configured to add all header files
 # that are in the directory include/LIBNAME
-TEMPLATE_FILES=$(INCDIR)/$(LIBNAME)/*.h $(INCDIR)/$(LIBNAME)/*.hpp
+TEMPLATE_FILES=$(INCDIR)/lemlib-tarball/*.h $(INCDIR)/lemlib-tarball/*.hpp
 
 .DEFAULT_GOAL=quick
 
